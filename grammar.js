@@ -31,19 +31,19 @@ function genConversionSpecifier(specifier) {
 
   const has_precision = x.precision == true;
 
-  const flag      = field('flag'     , immd(choice(...x.flags)));
-  const width     = field('width'    , choice(immd(/\d+/), immd('*')));
-  const precision = field('precision', choice(immd(/\d+/), immd('*')));
-  const modifier  = field('modifier' , choice(...x.lenght_modifier.map(immd)));
+  const flag      = field('flag'     , choice(...x.flags));
+  const width     = field('width'    , choice(/\d+/, '*'));
+  const precision = field('precision', choice(/\d+/, '*'));
+  const modifier  = field('modifier' , choice(...x.lenght_modifier));
 
   if (has_precision) {
     return seq(
       field('prefix','%'),
       repeat(flag),
       optional(width),
-      optional(seq(immd('.'), precision)),
+      optional(seq('.', precision)),
       optional(modifier),
-      field('specifier', immd(specifier))
+      field('specifier', specifier)
     );
   } else {
     return seq(
@@ -51,7 +51,7 @@ function genConversionSpecifier(specifier) {
       repeat(flag),
       optional(width),
       optional(modifier),
-      field('specifier', immd(specifier))
+      field('specifier', specifier)
     );
   }
 }
