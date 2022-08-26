@@ -24,6 +24,8 @@ const FIELDS = new Map([
 // Replace wN with $._wN
 // Replace wfN with $._wfN
 
+const immd = (x) => token.immediate(x);
+
 function genConversionSpecifier(specifier) {
   const e = FIELDS.get(specifier)
 
@@ -68,9 +70,74 @@ module.exports = grammar({
 
   rules: {
 
-    format: $ => repeat($._conversion),
+    fstring: $ => repeat($._string),
 
-    _conversion: $ => choice(
+    _string: $ => seq(
+      optional($._encoding_prefix),
+      '"',
+      repeat($._s_char),
+      '"',
+    ),
+
+    _encoding_prefix: $ => field(
+      'encoding',
+      choice(
+        'u8', // UTF-8 string literal
+        'L',  //  wide string literal
+        'u',  //  wide string literal
+        'U',  //  wide string literal
+      )
+    ),
+
+    _s_char: $ => choice(
+      $._escape_sequence,
+      $._conversion_spec,
+      /[^"%\\]+/
+    ),
+
+    _escape_sequence: $ => choice(
+      $.simple_escape,
+      $.octal_escape,
+      $.hexadecimal_escape,
+      $.universal_char,
+    ),
+
+    simple_escape: $ => choice(
+      // Quoting
+      seq(field('prefix','\\'), immd("'")),
+      seq(field('prefix','\\'), immd('"')),
+      seq(field('prefix','\\'), immd('?')),
+      seq(field('prefix','\\'), immd('\\')),
+      // Unicode Control Code Point
+      seq(field('prefix','\\'), immd('a')),
+      seq(field('prefix','\\'), immd('b')),
+      seq(field('prefix','\\'), immd('f')),
+      seq(field('prefix','\\'), immd('n')),
+      seq(field('prefix','\\'), immd('r')),
+      seq(field('prefix','\\'), immd('t')),
+      seq(field('prefix','\\'), immd('v')),
+    ),
+
+    octal_escape: $ => seq(
+      field('prefix','\\'),
+      field('digits',immd(/[0-9]{1,3}/)),
+    ),
+
+    // TODO: error recovery
+    hexadecimal_escape: $ => seq(
+      field('prefix','\\x'),
+      field('digits',immd(repeat1(/[0-9a-fA-F]+/))),
+    ),
+
+    _hexadecimal_digits: $ => field('digits',immd(repeat1(/[0-9a-fA-F]/))),
+
+    // TODO: error recovery
+    universal_char: $ => choice(
+      seq(field('prefix','\\u'), field('digits',/[0-9a-fA-F]{4}/)),
+      seq(field('prefix','\\U'), field('digits',/[0-9a-fA-F]{8}/)),
+    ),
+
+    _conversion_spec: $ => choice(
       $.integer,
       $.float,
       $.char,

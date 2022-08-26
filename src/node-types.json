@@ -144,9 +144,32 @@
     }
   },
   {
-    "type": "format",
+    "type": "fstring",
     "named": true,
-    "fields": {},
+    "fields": {
+      "encoding": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "L",
+            "named": false
+          },
+          {
+            "type": "U",
+            "named": false
+          },
+          {
+            "type": "u",
+            "named": false
+          },
+          {
+            "type": "u8",
+            "named": false
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
       "required": false,
@@ -160,6 +183,10 @@
           "named": true
         },
         {
+          "type": "hexadecimal_escape",
+          "named": true
+        },
+        {
           "type": "integer",
           "named": true
         },
@@ -168,14 +195,42 @@
           "named": true
         },
         {
+          "type": "octal_escape",
+          "named": true
+        },
+        {
           "type": "pointer",
+          "named": true
+        },
+        {
+          "type": "simple_escape",
           "named": true
         },
         {
           "type": "string",
           "named": true
+        },
+        {
+          "type": "universal_char",
+          "named": true
         }
       ]
+    }
+  },
+  {
+    "type": "hexadecimal_escape",
+    "named": true,
+    "fields": {
+      "prefix": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "\\x",
+            "named": false
+          }
+        ]
+      }
     }
   },
   {
@@ -363,6 +418,22 @@
     }
   },
   {
+    "type": "octal_escape",
+    "named": true,
+    "fields": {
+      "prefix": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "\\",
+            "named": false
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "pointer",
     "named": true,
     "fields": {
@@ -390,6 +461,22 @@
         "types": [
           {
             "type": "p",
+            "named": false
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "simple_escape",
+    "named": true,
+    "fields": {
+      "prefix": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "\\",
             "named": false
           }
         ]
@@ -445,7 +532,31 @@
     }
   },
   {
+    "type": "universal_char",
+    "named": true,
+    "fields": {
+      "prefix": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "\\U",
+            "named": false
+          },
+          {
+            "type": "\\u",
+            "named": false
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": " ",
+    "named": false
+  },
+  {
+    "type": "\"",
     "named": false
   },
   {
@@ -454,6 +565,10 @@
   },
   {
     "type": "%",
+    "named": false
+  },
+  {
+    "type": "'",
     "named": false
   },
   {
@@ -470,6 +585,10 @@
   },
   {
     "type": "0",
+    "named": false
+  },
+  {
+    "type": "?",
     "named": false
   },
   {
@@ -505,7 +624,27 @@
     "named": false
   },
   {
+    "type": "U",
+    "named": false
+  },
+  {
     "type": "X",
+    "named": false
+  },
+  {
+    "type": "\\",
+    "named": false
+  },
+  {
+    "type": "\\U",
+    "named": false
+  },
+  {
+    "type": "\\u",
+    "named": false
+  },
+  {
+    "type": "\\x",
     "named": false
   },
   {
@@ -573,6 +712,10 @@
     "named": false
   },
   {
+    "type": "r",
+    "named": false
+  },
+  {
     "type": "s",
     "named": false
   },
@@ -582,6 +725,14 @@
   },
   {
     "type": "u",
+    "named": false
+  },
+  {
+    "type": "u8",
+    "named": false
+  },
+  {
+    "type": "v",
     "named": false
   },
   {
