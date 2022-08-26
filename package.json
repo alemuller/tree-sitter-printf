@@ -22,5 +22,10 @@
   },
   "scripts": {
     "test": "tree-sitter test"
-  }
+  },
+  "tree-sitter": [
+    {
+      "scope": "printf"
+    }
+  ]
 }
