@@ -1,36 +1,76 @@
 [
   {
+    "type": "_conversion_spec",
+    "named": true,
+    "subtypes": [
+      {
+        "type": "char",
+        "named": true
+      },
+      {
+        "type": "float",
+        "named": true
+      },
+      {
+        "type": "integer",
+        "named": true
+      },
+      {
+        "type": "length",
+        "named": true
+      },
+      {
+        "type": "pointer",
+        "named": true
+      },
+      {
+        "type": "string",
+        "named": true
+      }
+    ]
+  },
+  {
+    "type": "_escape_sequence",
+    "named": true,
+    "subtypes": [
+      {
+        "type": "hexadecimal_escape",
+        "named": true
+      },
+      {
+        "type": "octal_escape",
+        "named": true
+      },
+      {
+        "type": "simple_escape",
+        "named": true
+      },
+      {
+        "type": "universal_char",
+        "named": true
+      }
+    ]
+  },
+  {
     "type": "char",
     "named": true,
     "fields": {
-      "flag": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": " ",
-            "named": false
-          },
-          {
-            "type": "+",
-            "named": false
-          },
-          {
-            "type": "-",
-            "named": false
-          },
-          {
-            "type": "0",
-            "named": false
-          }
-        ]
-      },
       "modifier": {
         "multiple": false,
         "required": false,
         "types": [
           {
             "type": "l",
+            "named": false
+          }
+        ]
+      },
+      "prefix": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "%",
             "named": false
           }
         ]
@@ -44,6 +84,16 @@
             "named": false
           }
         ]
+      },
+      "width": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "*",
+            "named": false
+          }
+        ]
       }
     }
   },
@@ -51,32 +101,6 @@
     "type": "float",
     "named": true,
     "fields": {
-      "flag": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": " ",
-            "named": false
-          },
-          {
-            "type": "#",
-            "named": false
-          },
-          {
-            "type": "+",
-            "named": false
-          },
-          {
-            "type": "-",
-            "named": false
-          },
-          {
-            "type": "0",
-            "named": false
-          }
-        ]
-      },
       "modifier": {
         "multiple": false,
         "required": false,
@@ -99,6 +123,26 @@
           },
           {
             "type": "l",
+            "named": false
+          }
+        ]
+      },
+      "precision": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "*",
+            "named": false
+          }
+        ]
+      },
+      "prefix": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "%",
             "named": false
           }
         ]
@@ -140,6 +184,16 @@
             "named": false
           }
         ]
+      },
+      "width": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "*",
+            "named": false
+          }
+        ]
       }
     }
   },
@@ -175,43 +229,11 @@
       "required": false,
       "types": [
         {
-          "type": "char",
+          "type": "_conversion_spec",
           "named": true
         },
         {
-          "type": "float",
-          "named": true
-        },
-        {
-          "type": "hexadecimal_escape",
-          "named": true
-        },
-        {
-          "type": "integer",
-          "named": true
-        },
-        {
-          "type": "length",
-          "named": true
-        },
-        {
-          "type": "octal_escape",
-          "named": true
-        },
-        {
-          "type": "pointer",
-          "named": true
-        },
-        {
-          "type": "simple_escape",
-          "named": true
-        },
-        {
-          "type": "string",
-          "named": true
-        },
-        {
-          "type": "universal_char",
+          "type": "_escape_sequence",
           "named": true
         }
       ]
@@ -237,32 +259,6 @@
     "type": "integer",
     "named": true,
     "fields": {
-      "flag": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": " ",
-            "named": false
-          },
-          {
-            "type": "#",
-            "named": false
-          },
-          {
-            "type": "+",
-            "named": false
-          },
-          {
-            "type": "-",
-            "named": false
-          },
-          {
-            "type": "0",
-            "named": false
-          }
-        ]
-      },
       "modifier": {
         "multiple": false,
         "required": false,
@@ -301,6 +297,26 @@
           },
           {
             "type": "z",
+            "named": false
+          }
+        ]
+      },
+      "precision": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "*",
+            "named": false
+          }
+        ]
+      },
+      "prefix": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "%",
             "named": false
           }
         ]
@@ -338,6 +354,16 @@
             "named": false
           }
         ]
+      },
+      "width": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "*",
+            "named": false
+          }
+        ]
       }
     }
   },
@@ -345,24 +371,6 @@
     "type": "length",
     "named": true,
     "fields": {
-      "flag": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": " ",
-            "named": false
-          },
-          {
-            "type": "+",
-            "named": false
-          },
-          {
-            "type": "-",
-            "named": false
-          }
-        ]
-      },
       "modifier": {
         "multiple": false,
         "required": false,
@@ -405,12 +413,32 @@
           }
         ]
       },
+      "prefix": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "%",
+            "named": false
+          }
+        ]
+      },
       "specifier": {
         "multiple": false,
         "required": true,
         "types": [
           {
             "type": "n",
+            "named": false
+          }
+        ]
+      },
+      "width": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "*",
             "named": false
           }
         ]
@@ -437,20 +465,12 @@
     "type": "pointer",
     "named": true,
     "fields": {
-      "flag": {
-        "multiple": true,
-        "required": false,
+      "prefix": {
+        "multiple": false,
+        "required": true,
         "types": [
           {
-            "type": " ",
-            "named": false
-          },
-          {
-            "type": "+",
-            "named": false
-          },
-          {
-            "type": "-",
+            "type": "%",
             "named": false
           }
         ]
@@ -461,6 +481,16 @@
         "types": [
           {
             "type": "p",
+            "named": false
+          }
+        ]
+      },
+      "width": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "*",
             "named": false
           }
         ]
@@ -487,28 +517,6 @@
     "type": "string",
     "named": true,
     "fields": {
-      "flag": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": " ",
-            "named": false
-          },
-          {
-            "type": "+",
-            "named": false
-          },
-          {
-            "type": "-",
-            "named": false
-          },
-          {
-            "type": "0",
-            "named": false
-          }
-        ]
-      },
       "modifier": {
         "multiple": false,
         "required": false,
@@ -519,12 +527,42 @@
           }
         ]
       },
+      "precision": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "*",
+            "named": false
+          }
+        ]
+      },
+      "prefix": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "%",
+            "named": false
+          }
+        ]
+      },
       "specifier": {
         "multiple": false,
         "required": true,
         "types": [
           {
             "type": "s",
+            "named": false
+          }
+        ]
+      },
+      "width": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "*",
             "named": false
           }
         ]
@@ -552,15 +590,7 @@
     }
   },
   {
-    "type": " ",
-    "named": false
-  },
-  {
     "type": "\"",
-    "named": false
-  },
-  {
-    "type": "#",
     "named": false
   },
   {
@@ -572,19 +602,11 @@
     "named": false
   },
   {
-    "type": "+",
-    "named": false
-  },
-  {
-    "type": "-",
+    "type": "*",
     "named": false
   },
   {
     "type": ".",
-    "named": false
-  },
-  {
-    "type": "0",
     "named": false
   },
   {

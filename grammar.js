@@ -27,32 +27,33 @@ const FIELDS = new Map([
 const immd = (x) => token.immediate(x);
 
 function genConversionSpecifier(specifier) {
-  const e = FIELDS.get(specifier)
+  const x = FIELDS.get(specifier)
 
-  const precision = (
-    e.precision ?
-    optional(seq(
-      token.immediate('.'),
-      field('precision', token.immediate(/\d+/))
-    ))
-    :
-    seq()
-  );
+  const has_precision = x.precision == true;
 
-  return seq(
-    '%',
-    repeat(field('flag',choice(
-      ...e.flags.map(token.immediate)
-    ))),
-    optional(field('width',
-      token.immediate(/\d+/)
-    )),
-    precision,
-    optional(field('modifier',choice(
-      ...e.lenght_modifier.map(token.immediate)
-    ))),
-    field('specifier',token.immediate(specifier)),
-  );
+  const flag      = field('flag'     , immd(choice(...x.flags)));
+  const width     = field('width'    , choice(immd(/\d+/), immd('*')));
+  const precision = field('precision', choice(immd(/\d+/), immd('*')));
+  const modifier  = field('modifier' , choice(...x.lenght_modifier.map(immd)));
+
+  if (has_precision) {
+    return seq(
+      field('prefix','%'),
+      repeat(flag),
+      optional(width),
+      optional(seq(immd('.'), precision)),
+      optional(modifier),
+      field('specifier', immd(specifier))
+    );
+  } else {
+    return seq(
+      field('prefix','%'),
+      repeat(flag),
+      optional(width),
+      optional(modifier),
+      field('specifier', immd(specifier))
+    );
+  }
 }
 
 module.exports = grammar({
@@ -66,6 +67,11 @@ module.exports = grammar({
     [$.integer],
     [$.integer, $.float, $.char, $.string],
     [$.integer, $.float, $.char, $.string, $.pointer, $.length],
+  ],
+
+  supertypes: $ => [
+    $._escape_sequence,
+    $._conversion_spec,
   ],
 
   rules: {
